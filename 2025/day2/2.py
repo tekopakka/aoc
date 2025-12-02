@@ -41,8 +41,7 @@ for item in data:
             i += 1
         start += 1
             
-print(goofys)
 result = 0
 for goof in goofys:
     result += goof
-print("Part 2 answer is", result)
+print("Part 2 answer is:", result)
