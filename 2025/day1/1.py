@@ -2,7 +2,7 @@ import sys
 sys.path.append("..")
 import common
 
-data = common.read_file("t.txt")
+data = common.read_file("test.txt")
 
 # Part 1
 curr = 50
