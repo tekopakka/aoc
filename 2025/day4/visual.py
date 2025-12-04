@@ -27,7 +27,7 @@ HEIGHT = H * NODE_SIZE
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Paper block organizer")
+pygame.display.set_caption("Paper block")
 
 def is_paper_accessible(i, j):
     spot = data[i-1][j-1]+data[i-1][j]+data[i-1][j+1]+\
@@ -66,12 +66,13 @@ while running:
             color = FILLED_COLOR if data[y][x] == "@" else EMPTY_COLOR
             rect = pygame.Rect(x * NODE_SIZE, y * NODE_SIZE, NODE_SIZE, NODE_SIZE)
             pygame.draw.rect(screen, color, rect)
+    time.sleep(0.02)
 
     pygame.display.flip()
-    time.sleep(0.2)
+    
 
     if done:
-        time.sleep(5)
+        time.sleep(2)
         running = False
 
 pygame.quit()
