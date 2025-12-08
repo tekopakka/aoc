@@ -3,7 +3,7 @@ sys.path.append("..")
 from common import read_file
 
 #Part 1
-data = read_file("test.txt")
+data = read_file("t.txt")
 answer = 0
 index_s = -2
 SPLITTER = "^"
@@ -30,35 +30,21 @@ for j in range(len(data)):
 print("Part 1 answer is:", answer)
 
 #Part 2
-timelines = []
+timelines = [0 for _ in data[0]]
 num_timelines = 0
 for i in range(len(data)):
-    remove_timelines = []
-    new_timelines = []
     line = data[i]
     if "S" in line:
         # Initial timeline 
-        timelines.append([index_s])
+        timelines[index_s] = 1
         num_timelines += 1
     elif SPLITTER in line:
-        splitters = line.count(SPLITTER)
-        j = 0
-        index = 0
-        while j < splitters:
-            index = line.index(SPLITTER, index)
-            for timeline in timelines:
-                if timeline[-1] == index:
-                    #SPLIT TIMELINE
-                    remove_timelines.append(timeline)
-                    new_timelines.append(timeline + [index-1])
-                    new_timelines.append(timeline + [index+1])
-                    num_timelines += 1
-            index += 1
-            j += 1
-    for rem in remove_timelines:
-        timelines.remove(rem)
-    for add in new_timelines:
-        timelines.append(add)
-    print(len(timelines))
-
+        for j in range(len(line)):
+            if line[j] == SPLITTER and timelines[j] > 0:
+                #SPLIT TIMELINE
+                timelines[j-1] += timelines[j]
+                timelines[j+1] += timelines[j]
+                num_timelines += timelines[j]
+                timelines[j] = 0
+                
 print("Part 2 answer is:", num_timelines)
